@@ -9,7 +9,8 @@ var searchCB = function(response) {
 
 $(document).ready(function() {
     $('#searchBox').submit(function() {
-      jQTubeUtil.search($(), searchCB);
+      jQTubeUtil.search($("#textbox").val(), searchCB);
       return false;
     });
+    
 })
