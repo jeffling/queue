@@ -1,5 +1,27 @@
 // Globals
 var queue = [];
+var currentlyPlaying = false;
+
+// Play whatever's on queue
+var playNext = function() { 
+    var next = queue.pop();
+    alert(next);
+    // Example code from library... Should figure out how I want this to be
+    jQuery("#player").tubeplayer({
+    	width: 600, // the width of the player
+    	height: 450, // the height of the player
+    	allowFullScreen: "true", // true by default, allow user to go full screen
+    	initialVideo: next, // the video that is loaded into the player
+    	playerID: "youtube-player", // the ID of the embedded youtube player
+    	preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
+    	onPlay: function(id){currentlyPlaying = play;}, // after the play method is called
+    	onPause: function(){currentlyPlaying = false;}, // after the pause method is called
+    	onStop: function(){currentlyPlaying = false;}, // after the player is stopped
+    	onSeek: function(time){}, // after the video has been seeked to a defined point
+    	onMute: function(){}, // after the player is muted
+    	onUnMute: function(){} // after the player is unmuted
+    });
+    }
 
 // Callback for the search form. 
 var searchCB = function(response) {
@@ -16,11 +38,14 @@ var searchCB = function(response) {
     	}
     $("#searchResults").html(html);
     setClickBind();
-}  
+}
 
 // Put to the back of the queue
 var addToQueue = function(vid) {
     queue.push(vid);
+    if (queue.length == 1) {
+       playNext();
+    } 
 }
 
 // set click event binding
