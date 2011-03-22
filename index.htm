@@ -10,26 +10,29 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 		<script type="text/javascript" src="jQuery.jQTubeUtil.min.js"></script>
-		<script type="text/javascript" src="jquery-youtube.js"></script>
+		<script type="text/javascript" src="jQuery.tubeplayer.min.js"></script>
 		<script type="text/javascript">
 			jQTubeUtil.init({
 				key: "AI39si4de7RHRNjJdQ2Y1ZJHqVAM2J-hP8NavEShCr3BjYTDhBz3w4zvzjNfS03UslXtDyT6jaIUWpaWan3BbiRv_LLkofeUAA",
 				maxResults:10   // *optional -- defined as 10 results by default
 			});
+			
+			
 		</script>
 		<script type="text/javascript" src="queue.js"></script>
 	</head>
 	
 	<body lang="en">
-	    <a href="#" onClick='jQuery("#youtube-player-container").tubeplayer("play")'> 
-	        Play video in player
+		<div id="queue-display">
+		</div>
+	    <a href="#" onClick='playNext()'> 
+	        Next
         </a>
 
 		<div id="player">
 		
 		</div>
 		<div class="frame">
-		    
 			<div id="searchBox">
 				<form id="searchForm">
 					<input type="text" id="textbox"></input>
