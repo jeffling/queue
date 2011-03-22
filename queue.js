@@ -26,19 +26,18 @@ var togglePlay = function() {
 
 // Callback for the search form. 
 var searchCB = function(response) {
-    var html = "";
+    var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
     		html += "<p><div class=\"videoThumb\">";
-    		html += "<a href=\"http://www.youtube.com/watch?v=" +  video.videoId + "\">";
+    		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\"></a>";
     		html += "</div>";
     		html += "<div class=\"videoTitle\">";
-    		html += "<a href=\"http://www.youtube.com/watch?v=" +  video.videoId + "\">" + video.title + "</a>";
+    		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">" + video.title + "</a>";
     		html += "</div></p>";
     	}
     $("#searchResults").html(html);
-    setClickBind();
 };
 
 // Takes from the front of the queue
@@ -73,6 +72,7 @@ var updateQueue = function() {
     $("#queue-display").html(html);
 };
 
+/**
 // set click event binding
 var setClickBind = function() {
     // intercept all link clicks to recognize clicks to videos
@@ -87,6 +87,7 @@ var setClickBind = function() {
         }
     });
 };
+**/
 
 // Video Stop Handler
 var onStopCB = function() {
@@ -113,8 +114,6 @@ $(document).ready(function() {
     
     // get the player reference just in case
     youtubeplayer = jQuery("#player").tubeplayer("player");
-    
-    setClickBind();
     
     $('#searchBox').submit(function(event) {
         jQTubeUtil.search($("#textbox").val(), searchCB);
