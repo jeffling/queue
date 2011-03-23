@@ -2,9 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>Queuetube</title>
-		<link rel="stylesheet" media="all" href=""/>
+		<title>Queue</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+            
+        <!-- Framework CSS --> 
+        <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection"> 
+        <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]--> 
 		<!-- Adding "maximum-scale=1" fixes the Mobile Safar<a href="index.htm" id="" title="index">index</a>i auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 		
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
@@ -23,16 +28,16 @@
 	</head>
 	
 	<body lang="en">
-		<div id="queue-display">
-		</div>
-	    <a href="#" onClick='playNext()'> 
-	        Next
-        </a>
-
-		<div id="player">
-		
-		</div>
-		<div class="frame">
+    <div class="container">
+		<div class="span-24 last">
+    	    <a href="#" onClick='playNext()'>Next</a>
+            <a href="#" onClick='togglePlay()'>Play/Pause</a>
+    		<div class="span-16" id="player">
+    		</div>
+            <div class="span-8 last" id="queue-display">
+        	</div>
+        </div>
+		<div class="span-24 last">
 			<div id="searchBox">
 				<form id="searchForm">
 					<input type="text" id="textbox"></input>
@@ -42,5 +47,6 @@
 			<div id="searchResults">
 			</div>
 		</div>
+    </div>
 	</body>
 </html>

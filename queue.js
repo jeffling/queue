@@ -19,7 +19,7 @@ var playNext = function() {
 
 var togglePlay = function() {
 	if (currentlyPlaying)
-		jQuery("#player").tubeplayer("stop");
+		jQuery("#player").tubeplayer("pause");
 	else
 	    jQuery("#player").tubeplayer("play");
 };
