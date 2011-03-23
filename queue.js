@@ -66,7 +66,9 @@ var updateQueue = function() {
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
-    	html += "<li>" + queue[vid] + "</li>";
+        html += "<li>";
+    	html += "<img src=\"http://img.youtube.com/vi/" + queue[vid] + "/3.jpg\"></a>"; 
+        html += "</li>";
     }
     html += "</ul>";
     $("#queue-display").html(html);
