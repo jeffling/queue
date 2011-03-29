@@ -6,17 +6,15 @@ var youtubeplayer;
 // Search options
 var orderby = "relevance";
 var time = "all_time";
-var suggestions = [];
+
 
 // autocomplete suggest
-var suggest = function(request, responseCB) {
+var suggestTerm = function(request, responseCB) {
 	jQTubeUtil.suggest(request.term, 
 		function(response) {
-			suggestions = response.suggestions;
+			responseCB(response.suggestions);
 		}
 	);
-
-	responseCB(suggestions);
 };
 
 // Play whatever's on queue
@@ -143,6 +141,7 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
-    $( "#textbox" ).autocomplete(suggest,
-    	{autoFill: true});
+    $( "#textbox" ).autocomplete(
+    	{source:suggestTerm,
+    	autoFill: true});
 });
