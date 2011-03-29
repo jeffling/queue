@@ -38,11 +38,27 @@
         	</div>
         </div>
 		<div class="span-24 last">
-			<div id="searchBox">
-				<form id="searchForm">
-					<input type="text" id="textbox"></input>
-					<input type="submit" id="formSubmit"></input>
-				</form>
+			<div id="container">
+				<div class="span-24 last">
+					<form id="searchForm">
+						<input type="text" id="textbox"></input>
+						<input type="submit" id="formSubmit"></input>
+					</form>
+				</div>
+				<div class="span-12">
+					<a href="#" onClick="orderby='relevance';">Relevance</a> /
+					<a href="#" onClick="orderby='published';">Published</a> /
+					<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
+					<a href="#" onClick="orderby='rating';">Rating</a> 
+				</div>
+				 
+				<div class="span-12 last">
+					<a href="#" onClick="time='today';">Today</a> /
+					<a href="#" onClick="time='this_week';">This week</a> /
+					<a href="#" onClick="time='this_month';">This month</a> /
+					<a href="#" onClick="time='all_time';">All time</a>
+				</div>
+				
 			</div>
 			<div id="searchResults">
 			</div>

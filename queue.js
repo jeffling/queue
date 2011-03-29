@@ -3,6 +3,10 @@ var queue = [];
 var currentlyPlaying = false;
 var youtubeplayer;
 
+// Search options
+var orderby = "relevance";
+var time = "all_time";
+
 // Play whatever's on queue
 var playNext = function() {
 	if (currentlyPlaying) {
@@ -43,7 +47,7 @@ var searchCB = function(response) {
 // Takes from the front of the queue
 var popQueue = function() {
 	if (queue.length > 0) {
-		var next = queue.pop();
+		var next = queue.shift();
 	    updateQueue();
 	    return next;
 	}
@@ -118,7 +122,12 @@ $(document).ready(function() {
     youtubeplayer = jQuery("#player").tubeplayer("player");
     
     $('#searchBox').submit(function(event) {
-        jQTubeUtil.search($("#textbox").val(), searchCB);
+        jQTubeUtil.search({
+        	"q": $("#textbox").val(),
+        	"time": time,
+        	"orderby": orderby,
+        	"max-results": 25}, searchCB);
+        
         event.preventDefault();
     });
 });
