@@ -24,7 +24,6 @@ var playNext = function() {
 	}
 	
     var next = popQueue();
-    alert(next);
     if (!next) {
     	return false;
     }
@@ -134,17 +133,29 @@ $(document).ready(function() {
     
     $("#searchForm").submit(function(event) {
         jQTubeUtil.search({
-        	"q": $("#textbox").val(),
+        	"q": $("#searchTextBox").val(),
         	"time": time,
         	"orderby": orderby,
         	"max-results": 25}, searchCB);
-        $('#searchForm').reset();
+        $("#searchTextBox").autocomplete("close");
         event.preventDefault();
     });
+    
+    // form that takes url and queues it
+    $("#videoEntryForm").submit(function(event) {
+    	var url = $("#videoEntryBox").val();
+        var results = url.match("[\\?&]v=([^&#]*)");
+        
+        if (results != null) {        
+            addToQueue(results[1]); // results[1] is the video ID
+        }
 
-    $("#textbox").autocomplete(
+        event.preventDefault();
+    });
+    
+    $("#searchTextBox").autocomplete(
     	{source:suggestTerm,
     	autoFill: true});
     
-    $("#textbox").focus();
+    $("#searchTextBox").focus();
 });

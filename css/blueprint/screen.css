@@ -263,3 +263,21 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+
+a {color: #006666;}
+
+a.linkrelated {
+	color: #006666;
+	font-size: 8.5pt;
+	padding-top: 2pt;
+}
+
+a.bold {font-weight: bold;}
+
+a.nounderline { text-decoration: none;}
+
+a:visited {color: #006666;}
+
+a:hover {color: #006666;}
+
+a:active {color: #006666;}

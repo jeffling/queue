@@ -40,14 +40,20 @@
         </div>
 		<div class="span-24 last">
 			<div id="container">
-				<div class="span-24 last">
+				<div class="span-16">
 					<form id="searchForm">
-						<input type="text" id="textbox"></input>
-						<input type="submit" id="formSubmit"></input>
+						<input type="text" id="searchTextBox"></input>
+						<input type="submit" id="searchFormSubmit"></input>
+					</form>
+				</div>
+				<div class="span-8 last">
+					<form id="videoEntryForm">
+						<input type="text" id="videoEntryBox"></input>
+						<input type="submit" id="videoEntryFormSubmit"></input>
 					</form>
 				</div>
 				<div class="span-12">
-					<a href="#" onClick="orderby='relevance';">Relevance</a> /
+					<a class="selected" href="#" onClick="orderby='relevance';">Relevance</a> /
 					<a href="#" onClick="orderby='published';">Published</a> /
 					<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
 					<a href="#" onClick="orderby='rating';">Rating</a> 
@@ -57,7 +63,7 @@
 					<a href="#" onClick="time='today';">Today</a> /
 					<a href="#" onClick="time='this_week';">This week</a> /
 					<a href="#" onClick="time='this_month';">This month</a> /
-					<a href="#" onClick="time='all_time';">All time</a>
+					<a class="selected" href="#" onClick="time='all_time';">All time</a>
 				</div>
 				<div class="span-24 last" id="searchResults">
 				</div>
