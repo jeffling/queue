@@ -107,6 +107,7 @@ var setClickBind = function() {
 
 // Video Stop Handler
 var onStopCB = function() {
+	alert("queue.length = " + queue.length + " currently playing = " + currentlyPlaying);
 	if (queue.length < 0) {
 		playNext();
 	}
@@ -131,17 +132,19 @@ $(document).ready(function() {
     // get the player reference just in case
     youtubeplayer = jQuery("#player").tubeplayer("player");
     
-    $('#searchBox').submit(function(event) {
+    $("#searchForm").submit(function(event) {
         jQTubeUtil.search({
         	"q": $("#textbox").val(),
         	"time": time,
         	"orderby": orderby,
         	"max-results": 25}, searchCB);
-        
+        $('#searchForm').reset();
         event.preventDefault();
     });
 
-    $( "#textbox" ).autocomplete(
+    $("#textbox").autocomplete(
     	{source:suggestTerm,
     	autoFill: true});
+    
+    $("#textbox").focus();
 });
