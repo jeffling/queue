@@ -24,6 +24,7 @@ var playNext = function() {
 	}
 	
     var next = popQueue();
+    alert(next);
     if (!next) {
     	return false;
     }
@@ -107,8 +108,7 @@ var setClickBind = function() {
 
 // Video Stop Handler
 var onStopCB = function() {
-	alert("queue.length = " + queue.length + " currently playing = " + currentlyPlaying);
-	if (queue.length < 0) {
+	if (queue.length > 0) {
 		playNext();
 	}
 	else
