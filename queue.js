@@ -1,5 +1,6 @@
 // Globals
 var queue = [];
+var queuePos = 0;
 var currentlyPlaying = false;
 var youtubeplayer;
 
@@ -10,7 +11,7 @@ var time = "all_time";
 // Change title and now playing header
 var nowPlaying = function(title)  {
     document.title = title;
-    $("#nowPlaying").text("title");
+    $("#nowPlaying").text(title);
 }
 
 // autocomplete suggest
@@ -34,7 +35,7 @@ var playNext = function() {
     }
     
     jQTubeUtil.video(next,function(response){
-         document.title = response.videos[0].title;
+         nowPlaying(response.videos[0].title);
     });
     
     jQuery("#player").tubeplayer("play", next);
@@ -52,13 +53,15 @@ var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
-    		html += "<p><div class=\"videoThumb\">";
+            html += "<div class=\"videoResult\">";
+    		html += "<div class=\"videoThumb\">";
     		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\"></a>";
     		html += "</div>";
     		html += "<div class=\"videoTitle\">";
     		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">" + video.title + "</a>";
-    		html += "</div></p>";
+    		html += "</div>";
+            html += "</div>";
     	}
     $("#searchResults").html(html);
 };
