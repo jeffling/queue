@@ -161,13 +161,15 @@ $(document).ready(function() {
         if (results != null) {        
             addToQueue(results[1]); // results[1] is the video ID
         }
-
+        
+        $("#videoEntryBox").val("");
         event.preventDefault();
     });
     
     $("#searchTextBox").autocomplete(
     	{source:suggestTerm,
-    	autoFill: true});
+    	autoFill: true}
+    );
     
     $("#searchTextBox").focus();
 });
