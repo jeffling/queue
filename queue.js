@@ -7,6 +7,11 @@ var youtubeplayer;
 var orderby = "relevance";
 var time = "all_time";
 
+// Change title and now playing header
+var nowPlaying = function(title)  {
+    document.title = title;
+    $("#nowPlaying").text("title");
+}
 
 // autocomplete suggest
 var suggestTerm = function(request, responseCB) {
@@ -27,6 +32,10 @@ var playNext = function() {
     if (!next) {
     	return false;
     }
+    
+    jQTubeUtil.video(next,function(response){
+         document.title = response.videos[0].title;
+    });
     
     jQuery("#player").tubeplayer("play", next);
 };

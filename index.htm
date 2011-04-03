@@ -31,11 +31,15 @@
 	<body lang="en">
     <div class="container">
 		<div class="span-24 last">
-    	    <a href="#" onClick='playNext()'>Next</a>
-            <a href="#" onClick='togglePlay()'>Play/Pause</a>
+            <div class="span-24 last">
+                <h1>Now Playing:</h1>
+                <h2 id="nowPlaying"></h2>
     		<div class="span-16" id="player">
+
     		</div>
             <div class="span-8 last" id="queue-display">
+                <a href="#" onClick='playNext()'>Next</a>
+                <a href="#" onClick='togglePlay()'>Play/Pause</a>
         	</div>
         </div>
 		<div class="span-24 last">
