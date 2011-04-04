@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
         <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]--> 
 		<!-- Adding "maximum-scale=1" fixes the Mobile Safar<a href="index.htm" id="" title="index">index</a>i auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
-		
+		<link rel="stylesheet" href="css/main.css" type="text/css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
@@ -30,54 +30,46 @@
 	
 	<body lang="en">
     <div class="container">
-		<div class="span-24 last">
-            <div class="container">
-                <div class="span-24 last">
-                    <h1>Now Playing:</h1>
-                    <h2 id="nowPlaying"></h2>
+		<div class="span-14" id="leftPanel">
+            <div class="span-14 last">
+                <div>
+                    <h1>Now Playing: </h1>
                 </div>
-        		<div class="span-16" id="player">
-    
-        		</div>
-                <div class="span-8 last">
-                    <a href="#" onClick='playNext()'>Next</a>
-                    <a href="#" onClick='togglePlay()'>Play/Pause</a>
-                    <div id="queue-display"></div>
-            	</div>
+                <h2 id="nowPlaying">PLACEHOLDER DIDDY POOP</h2>
             </div>
-        </div>
-		<div class="span-24 last">
-			<div id="container">
-				<div class="span-16">
-					<form id="searchForm">
-						<input type="text" id="searchTextBox"></input>
-						<input type="submit" id="searchFormSubmit"></input>
-					</form>
-				</div>
-				<div class="span-8 last">
-					<form id="videoEntryForm">
-						<input type="text" id="videoEntryBox"></input>
-						<input type="submit" id="videoEntryFormSubmit"></input>
-					</form>
-				</div>
-				<div class="span-12">
-					<a class="selected" href="#" onClick="orderby='relevance';">Relevance</a> /
-					<a href="#" onClick="orderby='published';">Published</a> /
-					<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
-					<a href="#" onClick="orderby='rating';">Rating</a> 
-				</div>
-				 
-				<div class="span-12 last">
-					<a href="#" onClick="time='today';">Today</a> /
-					<a href="#" onClick="time='this_week';">This week</a> /
-					<a href="#" onClick="time='this_month';">This month</a> /
-					<a class="selected" href="#" onClick="time='all_time';">All time</a>
-				</div>
-				<div class="span-24 last" id="searchResults">
-				</div>
+        	<div class="span-14 last" id="player">
+    		</div>
+			<div class="span-14 last">
+				<form id="searchForm">
+					<input type="text" id="searchTextBox"></input>
+					<input type="submit" id="searchFormSubmit"></input>
+				</form>
 			</div>
-			
+			<div class="span-7">
+				<a class="selected" href="#" onClick="orderby='relevance';">Relevance</a> /
+				<a href="#" onClick="orderby='published';">Published</a> /
+				<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
+				<a href="#" onClick="orderby='rating';">Rating</a> 
+			</div>
+			 
+			<div class="span-7 last">
+				<a href="#" onClick="time='today';">Today</a> /
+				<a href="#" onClick="time='this_week';">This week</a> /
+				<a href="#" onClick="time='this_month';">This month</a> /
+				<a class="selected" href="#" onClick="time='all_time';">All time</a>
+			</div>
+			<div class="span-12 last" id="searchResults">
+			</div>
 		</div>
+        <div class="span-10 last">
+            <a href="#" onClick='playNext()'>Next</a>
+            <a href="#" onClick='togglePlay()'>Play/Pause</a>
+            <form id="videoEntryForm">
+				<input type="text" id="videoEntryBox"></input>
+				<input type="submit" id="videoEntryFormSubmit"></input>
+			</form>
+            <div id="queue-display"></div>
+        </div>
     </div>
 	</body>
 </html>

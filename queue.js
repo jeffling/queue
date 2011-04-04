@@ -29,7 +29,7 @@ var playNext = function() {
 		togglePlay();
 	}
 	
-    var next = popQueue();
+    var next = queue[queuePos];
     if (!next) {
     	return false;
     }
@@ -127,9 +127,13 @@ var onStopCB = function() {
 };
 
 $(document).ready(function() {
+    var leftPanelWidth = $("#leftPanel").width();
 	// set up player
     jQuery("#player").tubeplayer({
+        width: leftPanelWidth,
+        height: (leftPanelWidth/4)*3,
     	playerID: "youtube-player", // the ID of the embedded youtube player
+        initialVideo: "0GLoHifu6aM",
     	preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
     	onPlay: function(id){currentlyPlaying = true;}, // after the play method is called
     	onPause: function(){currentlyPlaying = false;}, // after the pause method is called
