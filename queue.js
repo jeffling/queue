@@ -1,6 +1,6 @@
 // Globals
 var queue = [];
-var queuePos = 0;
+var queuePos = -1;
 var currentlyPlaying = false;
 var youtubeplayer;
 
@@ -25,14 +25,16 @@ var suggestTerm = function(request, responseCB) {
 
 // Play whatever's on queue
 var playNext = function() {
-	if (currentlyPlaying) {
+    queuePos++;
+	var next = queue[queuePos];
+    if (!next) {
+        queuePos--;
+        return false;
+    }
+    
+    if (currentlyPlaying) {
 		togglePlay();
 	}
-	
-    var next = queue[queuePos];
-    if (!next) {
-    	return false;
-    }
     
     jQTubeUtil.video(next,function(response){
          nowPlaying(response.videos[0].title);
@@ -55,11 +57,11 @@ var searchCB = function(response) {
     		var video = response.videos[vid];
             html += "<div class=\"videoResult\">";
     		html += "<div class=\"videoThumb\">";
-    		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">";
+    		html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\"></a>";
     		html += "</div>";
     		html += "<div class=\"videoTitle\">";
-    		html += "<a href=\"#\" onClick=\"addToQueue('" + video.videoId + "')\">" + video.title + "</a>";
+    		html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">" + video.title + "</a>";
     		html += "</div>";
             html += "</div>";
     	}
@@ -80,20 +82,32 @@ var popQueue = function() {
 var addToQueue = function(vid) {
     queue.push(vid);
     
-    // if there is nothing playing, why not play the new video?
-    if (!currentlyPlaying) {
+    // Autoplay first clicked video
+    if (queue.length == 1) {
        playNext();
     }
     updateQueue();
+    
+    return false;
 };
 
 // Update Queue List
 var updateQueue = function() {
+    $("#queue-display").css({
+        width: $("#rightPanel").width(),
+        height: $(window).height() - ($("#playerControls").height() + $("#videoEntry").height())
+    });
+    
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
-        html += "<li>";
-    	html += "<img src=\"http://img.youtube.com/vi/" + queue[vid] + "/3.jpg\"></a>"; 
+        html += "<li"
+        if (queuePos == vid) {
+            html += "id=\"currentVideo\" ";
+        }    
+        html =">";
+    	html += "<img ";
+        html += "src=\"http://img.youtube.com/vi/" + queue[vid] + "/3.jpg\"></a>"; 
         html += "</li>";
     }
     html += "</ul>";
@@ -128,6 +142,7 @@ var onStopCB = function() {
 
 $(document).ready(function() {
     var leftPanelWidth = $("#leftPanel").width();
+    
 	// set up player
     jQuery("#player").tubeplayer({
         width: leftPanelWidth,
@@ -143,10 +158,20 @@ $(document).ready(function() {
     	onUnMute: function(){}, // after the player is unmuted
     	onPlayerEnded: function(){onStopCB();}
     });
-    
+
     // get the player reference just in case
     youtubeplayer = jQuery("#player").tubeplayer("player");
     
+    // initialize rightPanel
+    updateQueue();
+    $(window).resize(function(event) {updateQueue()});
+    
+    // set some form behavior, thanks to 
+    $("input, textarea").focus(function(event) {
+            this.value = '';
+    });
+    
+    // set search form call handlers
     $("#searchForm").submit(function(event) {
         jQTubeUtil.search({
         	"q": $("#searchTextBox").val(),
@@ -166,14 +191,21 @@ $(document).ready(function() {
             addToQueue(results[1]); // results[1] is the video ID
         }
         
-        $("#videoEntryBox").val("");
+        $("#videoEntryBox").val("Enter Youtube URL");
         event.preventDefault();
     });
+    
+    // if user didn't enter anything put default instructions back
+    $("#videoEntryBox").blur(function(event) {
+        if (this.value == "")
+            this.value = "Enter Youtube URL";
+    });
+    
     
     $("#searchTextBox").autocomplete(
     	{source:suggestTerm,
     	autoFill: true}
     );
     
-    $("#searchTextBox").focus();
+    $("#searchTextBox").select();
 });
