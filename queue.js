@@ -42,6 +42,7 @@ var playNext = function() {
     
     jQuery("#player").tubeplayer("play", next);
     updateQueue();
+    return false;
 };
 
 var togglePlay = function() {
