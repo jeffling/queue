@@ -41,6 +41,7 @@ var playNext = function() {
     });
     
     jQuery("#player").tubeplayer("play", next);
+    updateQueue();
 };
 
 var togglePlay = function() {
@@ -81,18 +82,19 @@ var popQueue = function() {
 // Put to the back of the queue
 var addToQueue = function(vid) {
     queue.push(vid);
-    
+
     // Autoplay first clicked video
     if (queue.length == 1) {
        playNext();
     }
-    updateQueue();
     
+    updateQueue();
     return false;
 };
 
 // Update Queue List
 var updateQueue = function() {
+    // makes sure the queue-display height is updated
     $("#queue-display").css({
         width: $("#rightPanel").width(),
         height: $(window).height() - ($("#playerControls").height() + $("#videoEntry").height())
@@ -101,17 +103,22 @@ var updateQueue = function() {
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
-        html += "<li"
+        html += "<li";
         if (queuePos == vid) {
-            html += "id=\"currentVideo\" ";
-        }    
-        html =">";
+            html += " id=\"currentVideo\" ";
+        }
+        html += ">";
     	html += "<img ";
         html += "src=\"http://img.youtube.com/vi/" + queue[vid] + "/3.jpg\"></a>"; 
         html += "</li>";
     }
     html += "</ul>";
     $("#queue-display").html(html);
+    
+    // make list scroll with current video
+    if (queue.length != 0)
+        $("#queue-display").scrollTo("#currentVideo", 800);
+    
 };
 
 /**
