@@ -1,0 +1,29 @@
+#queue-display {
+    overflow:auto;
+}
+
+.floatWithScroll {
+    position:fixed;
+}
+
+#nowPlaying {
+    padding-left: 50px;
+}
+
+#videoEntryBox {
+    font-size:1.0em;
+    width:80%;
+}
+    
+#searchTextBox {
+    width: 17em;
+    font-size:2em;
+}
+
+#searchForm {
+    text-align: center;
+}
+
+#currentVideo {
+    background-color:yellow;
+}
