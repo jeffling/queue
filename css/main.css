@@ -1,4 +1,6 @@
 #queue-display {
+    padding:0px;
+    margin:0px;
     overflow:auto;
 }
 
@@ -24,6 +26,13 @@
     text-align: center;
 }
 
+#queue-display ul {
+    padding:0px;
+    margin:0px;
+    list-style-type:none; 
+}
+
+
 #currentVideo {
-    background-color:yellow;
+    background-color:grey;
 }

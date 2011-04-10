@@ -31,45 +31,45 @@
 	
 	<body lang="en">
     <div class="container">
-		<div class="span-14" id="leftPanel">
-            <div class="span-14 last">
+		<div class="span-16" id="leftPanel">
+            <div class="span-16 last">
                 <div>
                     <h1>Now Playing: </h1>
                 </div>
                 <h2 id="nowPlaying">PLACEHOLDER</h2>
             </div>
-        	<div class="span-14 last" id="player">
+        	<div class="span-16 last" id="player">
     		</div>
-			<div class="span-14 last">
+			<div class="span-16 last">
 				<form id="searchForm">
 					<input value="Enter Search Term" class="title" type="text" id="searchTextBox"></input>
 					<input type="submit" id="searchFormSubmit"></input>
 				</form>
 			</div>
-			<div class="span-7">
+			<div class="span-8">
 				<a class="selected" href="#" onClick="orderby='relevance';">Relevance</a> /
 				<a href="#" onClick="orderby='published';">Published</a> /
 				<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
 				<a href="#" onClick="orderby='rating';">Rating</a> 
 			</div>
 			 
-			<div class="span-7 last">
+			<div class="span-8 last">
 				<a href="#" onClick="time='today';">Today</a> /
 				<a href="#" onClick="time='this_week';">This week</a> /
 				<a href="#" onClick="time='this_month';">This month</a> /
 				<a class="selected" href="#" onClick="time='all_time';">All time</a>
 			</div>
-			<div class="span-12 last" id="searchResults">
+			<div class="span-16 last" id="searchResults">
 			</div>
 		</div>
-        <div class="span-10 last" id="rightPanel">
+        <div class="span-8 last" id="rightPanel">
             <div class="floatWithScroll">
-                <div class="span-10 last" id="playerControls">
+                <div class="span-8 last" id="playerControls">
                     <a class="controls" href="#" onClick='playNext()'>Next</a>
                     <a class="controls" href="#" onClick='togglePlay()'>Play/Pause</a>
                 </div>
-                <div class="span-10 last" id="queue-display"></div>
-                <div class="span-10 last" id="videoEntry">
+                <div class="span-8 last" id="queue-display"></div>
+                <div class="span-8 last" id="videoEntry">
                 <form id="videoEntryForm">
                     <input type="text" id="videoEntryBox" value="Enter Youtube URL"></input>
         			<input type="submit" id="videoEntryFormSubmit"></input>

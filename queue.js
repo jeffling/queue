@@ -104,7 +104,7 @@ var updateQueue = function() {
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
-        html += "<li";
+        html += "<li class=\"queuedVideo\" ";
         if (queuePos == vid) {
             html += " id=\"currentVideo\" ";
         }
