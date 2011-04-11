@@ -32,7 +32,10 @@
     list-style-type:none; 
 }
 
+.videoResult:hover {
+    background-color:grey;
+}
 
 #currentVideo {
-    background-color:grey;
+    background-color:orange;
 }

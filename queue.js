@@ -60,7 +60,7 @@ var searchCB = function(response) {
             html += "<div class=\"videoResult\">";
         	html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">";
     		html += "<div class=\"videoThumb\">";
-    		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
+    		html += "<img style=\"width:50px;height:50px;\" src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
     		html += "<div class=\"videoTitle\">";
     		html += video.title;
