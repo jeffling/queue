@@ -47,9 +47,11 @@ a {
 #currentVideo {
     background-color:orange;
 }
+
 #playerControls {
     text-align:center;
 }
+
 .controls {
     font-size: 3em;
     padding:.2em;

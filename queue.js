@@ -87,6 +87,7 @@ var searchCB = function(response) {
                         html += "</a>";
     	}
     $("#searchResults").html(html);
+    $(window).scrollTo("#searchTextBox", 800);
 };
 
 // Takes from the front of the queue
