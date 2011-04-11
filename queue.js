@@ -104,10 +104,9 @@ var addToQueue = function(vidId, vidTitle) {
     queue.push({id:vidId, title:vidTitle});
 
     // Autoplay if not currently playing
-    if (!currentlyPlaying){ 
-        alert(currentlyPlaying);
+    if (!currentlyPlaying)
        playNext();
-    }
+    
     updateQueue();
     return false;
 };
