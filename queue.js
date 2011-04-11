@@ -58,13 +58,14 @@ var searchCB = function(response) {
     	for(vid in response.videos){
     		var video = response.videos[vid];
             html += "<div class=\"videoResult\">";
+        	html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">";
     		html += "<div class=\"videoThumb\">";
-    		html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">";
-    		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\"></a>";
+    		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
     		html += "<div class=\"videoTitle\">";
-    		html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">" + video.title + "</a>";
+    		html += video.title;
     		html += "</div>";
+            html += "</a>";
             html += "</div>";
     	}
     $("#searchResults").html(html);
@@ -95,12 +96,6 @@ var addToQueue = function(vid) {
 
 // Update Queue List
 var updateQueue = function() {
-    // makes sure the queue-display height is updated
-    $("#queue-display").css({
-        width: $("#rightPanel").width(),
-        height: $(window).height() - ($("#playerControls").height() + $("#videoEntry").height())
-    });
-    
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
@@ -170,9 +165,15 @@ $(document).ready(function() {
     // get the player reference just in case
     youtubeplayer = jQuery("#player").tubeplayer("player");
     
-    // initialize rightPanel
-    updateQueue();
-    $(window).resize(function(event) {updateQueue()});
+    // initialize rightPanel    
+    $(window).resize(function(event) {    
+        // makes sure the queue-display height is updated
+        $("#queue-display").css({
+            width: $("#rightPanel").width(),
+            height: $(window).height() - ($("#playerControls").height() + $("#videoEntry").height())
+        });
+    });
+    $(window).resize(); 
     
     // set some form behavior, thanks to 
     $("input, textarea").focus(function(event) {
