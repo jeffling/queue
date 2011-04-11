@@ -62,6 +62,7 @@ var playPrev = function() {
     return false;
 };
 
+// Go between play/pause states
 var togglePlay = function() {
 	if (currentlyPlaying)
 		jQuery("#player").tubeplayer("pause");
@@ -74,7 +75,7 @@ var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
-            html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + video.title + "');\">";
+            html += "<a href=\"#\" onClick=\"return addToQueue(\"" + video.videoId + "\", \"" + video.title + "\");\">";
             html += "<div class=\"span-16 last videoResult\">";
     		html += "<div class=\"span-4 videoThumb\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
@@ -198,8 +199,10 @@ $(document).ready(function() {
     	var url = $("#videoEntryBox").val();
         var results = url.match("[\\?&]v=([^&#]*)");
         
-        if (results != null) {        
-            addToQueue(results[1]); // results[1] is the video ID
+        if (results != null) {  
+            jQTubeUtil.video(results[1],function(response){
+	             addToQueue(results[1], response[0].title);
+            });      
         }
         
         $("#videoEntryBox").val("Enter Youtube URL");
