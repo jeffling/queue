@@ -35,12 +35,10 @@ var playNext = function() {
     if (currentlyPlaying) {
 		togglePlay();
 	}
+
+    nowPlaying(next.title);
     
-    jQTubeUtil.video(next,function(response){
-         nowPlaying(response.videos[0].title);
-    });
-    
-    jQuery("#player").tubeplayer("play", next);
+    jQuery("#player").tubeplayer("play", next.id);
     updateQueue();
     return false;
 };
@@ -57,13 +55,13 @@ var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
-            html += "<div class=\"videoResult\">";
-        	html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "');\">";
-    		html += "<div class=\"videoThumb\">";
-    		html += "<img style=\"width:50px;height:50px;\" src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
+            html += "<div class=\"span-16 last videoResult\">";
+        	html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + video.title + "');\">";
+    		html += "<div class=\"span-4 videoThumb\">";
+    		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
-    		html += "<div class=\"videoTitle\">";
-    		html += video.title;
+    		html += "<div class=\"span-12 last videoTitle\">";
+    		html += "<h3>" + video.title + "</h3>";
     		html += "</div>";
             html += "</a>";
             html += "</div>";
@@ -82,8 +80,8 @@ var popQueue = function() {
 };
 
 // Put to the back of the queue
-var addToQueue = function(vid) {
-    queue.push(vid);
+var addToQueue = function(vidId, vidTitle) {
+    queue.push({id:vidId, title:vidTitle});
 
     // Autoplay first clicked video
     if (queue.length == 1) {
@@ -104,9 +102,12 @@ var updateQueue = function() {
             html += " id=\"currentVideo\" ";
         }
         html += ">";
+        html += "<div class=\"span-4 vidThumb\">";
     	html += "<img ";
-        html += "src=\"http://img.youtube.com/vi/" + queue[vid] + "/3.jpg\"></a>"; 
-        html += "</li>";
+        html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
+        html += "</div> <div class=\"span-4 last vidTitle\">"; 
+        html += "<h4>" + queue[vid].title + "</h4>"; 
+        html += "</div></li>";
     }
     html += "</ul>";
     $("#queue-display").html(html);
@@ -116,23 +117,6 @@ var updateQueue = function() {
         $("#queue-display").scrollTo("#currentVideo", 800);
     
 };
-
-/**
-// set click event binding
-var setClickBind = function() {
-    // intercept all link clicks to recognize clicks to videos
-
-    $("a").click( function(event) {
-        var url = $(this).attr('href');
-        var results = url.match("[\\?&]v=([^&#]*)");
-        
-        if (results != null) {        
-            event.preventDefault();
-            addToQueue(results[1]); // results[1] is the video ID
-        }
-    });
-};
-**/
 
 // Video Stop Handler
 var onStopCB = function() {

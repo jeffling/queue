@@ -1,7 +1,15 @@
+div {
+    background-color:inherit;
+}
+
 #queue-display {
     padding:0px;
     margin:0px;
     overflow:auto;
+}
+
+a {
+    text-decoration:none;
 }
 
 .floatWithScroll {
