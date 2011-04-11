@@ -103,11 +103,11 @@ var popQueue = function() {
 var addToQueue = function(vidId, vidTitle) {
     queue.push({id:vidId, title:vidTitle});
 
-    // Autoplay first clicked video
-    if (queue.length == 1) {
+    // Autoplay if not currently playing
+    if (!currentlyPlaying){ 
+        alert(currentlyPlaying);
        playNext();
     }
-    
     updateQueue();
     return false;
 };
@@ -139,7 +139,7 @@ var updateQueue = function() {
 
 // Video Stop Handler
 var onStopCB = function() {
-	if (queue.length > 0) {
+	if (queue.length > (queuePos+1) ) {
 		playNext();
 	}
 	else
@@ -157,7 +157,7 @@ $(document).ready(function() {
         initialVideo: "0GLoHifu6aM",
     	preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
     	onPlay: function(id){currentlyPlaying = true;}, // after the play method is called
-    	onPause: function(){currentlyPlaying = false;}, // after the pause method is called
+    	onPause: function(){}, // after the pause method is called
     	onStop: function(){currentlyPlaying = false;}, // after the player is stopped
     	onSeek: function(time){}, // after the video has been seeked to a defined point
     	onMute: function(){}, // after the player is muted
