@@ -43,6 +43,25 @@ var playNext = function() {
     return false;
 };
 
+// Play whatever's on queue previous
+var playPrev = function() {
+    if (queuePos < 1)
+        return false;
+        
+    queuePos--;
+    var next = queue[queuePos];
+    
+    if (currentlyPlaying) {
+		togglePlay();
+	}
+
+    nowPlaying(next.title);
+    
+    jQuery("#player").tubeplayer("play", next.id);
+    updateQueue();
+    return false;
+};
+
 var togglePlay = function() {
 	if (currentlyPlaying)
 		jQuery("#player").tubeplayer("pause");
@@ -55,16 +74,17 @@ var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
+            html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + video.title + "');\">";
             html += "<div class=\"span-16 last videoResult\">";
-        	html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + video.title + "');\">";
     		html += "<div class=\"span-4 videoThumb\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
     		html += "<div class=\"span-12 last videoTitle\">";
     		html += "<h3>" + video.title + "</h3>";
     		html += "</div>";
-            html += "</a>";
+
             html += "</div>";
+                        html += "</a>";
     	}
     $("#searchResults").html(html);
 };
