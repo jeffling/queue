@@ -82,9 +82,8 @@ var searchCB = function(response) {
     		html += "<div class=\"span-12 last videoTitle\">";
     		html += "<h3>" + video.title + "</h3>";
     		html += "</div>";
-
             html += "</div>";
-                        html += "</a>";
+            html += "</a>";
     	}
     $("#searchResults").html(html);
     $(window).scrollTo("#searchTextBox", 800);
@@ -118,7 +117,7 @@ var updateQueue = function() {
     // update queue list on UI
     var html = "<ul>";
     for (vid in queue) {
-        html += "<li class=\"queuedVideo\" ";
+        html += "<li class=\"span-8 last queuedVideo\" ";
         if (queuePos == vid) {
             html += " id=\"currentVideo\" ";
         }
@@ -136,7 +135,6 @@ var updateQueue = function() {
     // make list scroll with current video
     if (queue.length != 0)
         $("#queue-display").scrollTo("#currentVideo", 800);
-    
 };
 
 // Video Stop Handler

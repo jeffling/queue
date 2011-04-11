@@ -34,10 +34,15 @@ a {
     text-align: center;
 }
 
+#searchResults {
+    padding:5px;
+}
+
 #queue-display ul {
     padding:0px;
     margin:0px;
-    list-style-type:none; 
+    list-style-type:none;
+    display:inline-block;
 }
 
 .videoResult:hover {
@@ -49,6 +54,9 @@ a {
 }
 
 #playerControls {
+    text-align:center;
+}
+#videoEntry {
     text-align:center;
 }
 
