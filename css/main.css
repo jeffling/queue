@@ -1,5 +1,6 @@
 div {
     background-color:inherit;
+    overflow-x:hidden;
 }
 
 #queue-display {
