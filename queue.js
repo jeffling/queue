@@ -75,13 +75,13 @@ var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
-            html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + video.title + "');\">";
+            html += "<a href=\"#\" onClick=\"return addToQueue('" + video.videoId + "', '" + escape(video.title) + "');\">";
             html += "<div class=\"span-16 last videoResult\">";
     		html += "<div class=\"span-4 videoThumb\">";
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
     		html += "<div class=\"span-12 last videoTitle\">";
-    		html += "<h3>" + video.title + "</h3>";
+    		html += "<h3>" + escape(video.title) + "</h3>";
     		html += "</div>";
             html += "</div>";
             html += "</a>";
