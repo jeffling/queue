@@ -70,9 +70,39 @@ var togglePlay = function() {
 	    jQuery("#player").tubeplayer("play");
 };
 
+// Put to the back of the queue
+var addToQueue = function(vidId, vidTitle) {
+    queue.push({id:vidId, title:vidTitle});
+
+    // Autoplay if not currently playing
+    if (!currentlyPlaying)
+       playNext();
+    
+    updateQueue();
+    return false;
+};
+
+// skips to a video in the queue given queue index
+var skipTo = function(index) {
+    if (index == queuePos)
+        return false;
+    
+    if (currentlyPlaying)
+    	togglePlay();
+
+
+    nowPlaying(unescape(queue[index].title));
+    queuePos = index;
+    jQuery("#player").tubeplayer("play", queue[index].id);
+    updateQueue();
+    return false;
+}
+
 // Callback for the search form. 
 // Search Result Display
 var searchCB = function(response) {
+    
+    // Update UI
     var html = ""; 
     	for(vid in response.videos){
     		var video = response.videos[vid];
@@ -88,34 +118,16 @@ var searchCB = function(response) {
             html += "</a>";
     	}
     $("#searchResults").html(html);
-    $(window).scrollTo("#searchTextBox", 800);
-};
-
-// Takes from the front of the queue
-var popQueue = function() {
-	if (queue.length > 0) {
-		var next = queue.shift();
-	    updateQueue();
-	    return next;
-	}
-	return false;
-};
-
-// Put to the back of the queue
-var addToQueue = function(vidId, vidTitle) {
-    queue.push({id:vidId, title:vidTitle});
-
-    // Autoplay if not currently playing
-    if (!currentlyPlaying)
-       playNext();
     
-    updateQueue();
-    return false;
+    // Scroll to the text box after you press enter
+    $(window).scrollTo("#searchTextBox", 800);
 };
 
 // Update Queue List
 var updateQueue = function() {
+    
     // update queue list on UI
+    var counter = 0;
     var html = "<ul>";
     for (vid in queue) {
         html += "<li class=\"span-8 last queuedVideo\" ";
@@ -123,19 +135,23 @@ var updateQueue = function() {
             html += " id=\"currentVideo\" ";
         }
         html += ">";
+        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
         html += "<div class=\"span-4 vidThumb\">";
     	html += "<img ";
         html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
         html += "</div> <div class=\"span-4 last vidTitle\">"; 
         html += "<h4>" + unescape(queue[vid].title) + "</h4>"; 
         html += "</div></li>";
+        html += "</a>";
+        counter++;
     }
     html += "</ul>";
     $("#queue-display").html(html);
     
-    // make list scroll with current video
+    // make list scroll with current video TODO: doesn't quite work loll
     if (queue.length != 0)
         $("#queue-display").scrollTo("#currentVideo", 800);
+        
 };
 
 // Video Stop Handler
