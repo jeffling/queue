@@ -36,7 +36,7 @@ var playNext = function() {
 		togglePlay();
 	}
 
-    nowPlaying(next.title);
+    nowPlaying(unescape(next.title));
     
     jQuery("#player").tubeplayer("play", next.id);
     updateQueue();
@@ -55,7 +55,7 @@ var playPrev = function() {
 		togglePlay();
 	}
 
-    nowPlaying(next.title);
+    nowPlaying(unescape(next.title));
     
     jQuery("#player").tubeplayer("play", next.id);
     updateQueue();
@@ -71,6 +71,7 @@ var togglePlay = function() {
 };
 
 // Callback for the search form. 
+// Search Result Display
 var searchCB = function(response) {
     var html = ""; 
     	for(vid in response.videos){
@@ -81,7 +82,7 @@ var searchCB = function(response) {
     		html += "<img src=\"http://img.youtube.com/vi/" + video.videoId + "/3.jpg\">";
     		html += "</div>";
     		html += "<div class=\"span-12 last videoTitle\">";
-    		html += "<h3>" + escape(video.title) + "</h3>";
+    		html += "<h3>" + video.title + "</h3>";
     		html += "</div>";
             html += "</div>";
             html += "</a>";
@@ -126,7 +127,7 @@ var updateQueue = function() {
     	html += "<img ";
         html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
         html += "</div> <div class=\"span-4 last vidTitle\">"; 
-        html += "<h4>" + queue[vid].title + "</h4>"; 
+        html += "<h4>" + unescape(queue[vid].title) + "</h4>"; 
         html += "</div></li>";
     }
     html += "</ul>";
@@ -218,7 +219,8 @@ $(document).ready(function() {
     
     $("#searchTextBox").autocomplete(
     	{source:suggestTerm,
-    	autoFill: true}
+    	autoFill: true,
+        delay: 100}
     );
     
     $("#searchTextBox").select();
