@@ -130,12 +130,12 @@ var updateQueue = function() {
     var counter = 0;
     var html = "<ul>";
     for (vid in queue) {
+        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
         html += "<li class=\"span-8 last queuedVideo\" ";
         if (queuePos == vid) {
             html += " id=\"currentVideo\" ";
         }
         html += ">";
-        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
         html += "<div class=\"span-4 vidThumb\">";
     	html += "<img ";
         html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
@@ -150,7 +150,7 @@ var updateQueue = function() {
     
     // make list scroll with current video TODO: doesn't quite work loll
     if (queue.length != 0)
-        $("#queue-display").scrollTo("#currentVideo", 800);
+        $("#queue-display").scrollTo("#currentVideo", 100);
         
 };
 
