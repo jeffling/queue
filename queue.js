@@ -1,5 +1,5 @@
 // Globals
-var queue = [];
+var queue = new Array();
 var queuePos = -1;
 var currentlyPlaying = false;
 var youtubeplayer;
@@ -12,7 +12,7 @@ var time = "all_time";
 var nowPlaying = function(title)  {
     document.title = title;
     $("#nowPlaying").text(title);
-}
+};
 
 // autocomplete suggest
 var suggestTerm = function(request, responseCB) {
@@ -32,15 +32,7 @@ var playNext = function() {
         return false;
     }
     
-    if (currentlyPlaying) {
-		togglePlay();
-	}
-
-    nowPlaying(unescape(next.title));
-    
-    jQuery("#player").tubeplayer("play", next.id);
-    updateQueue();
-    return false;
+    return play(next);
 };
 
 // Play whatever's on queue previous
@@ -49,18 +41,21 @@ var playPrev = function() {
         return false;
         
     queuePos--;
-    var next = queue[queuePos];
     
+    return play(queue[queuePos]);
+};
+
+var play = function(vid) {   
     if (currentlyPlaying) {
-		togglePlay();
+    	togglePlay();
 	}
 
-    nowPlaying(unescape(next.title));
+    nowPlaying(unescape(vid.title));
     
-    jQuery("#player").tubeplayer("play", next.id);
+    jQuery("#player").tubeplayer("play", vid.id);
     updateQueue();
     return false;
-};
+}
 
 // Go between play/pause states
 var togglePlay = function() {
@@ -82,6 +77,21 @@ var addToQueue = function(vidId, vidTitle) {
     return false;
 };
 
+// Delete from queue 
+var delFrom = function(index) {
+    var wasPlaying = currentlyPlaying;
+    if (queuePos == index) 
+        togglePlay();
+        
+    queue.splice(index, 1);
+    
+    if (wasPlaying && (queuePos == index))
+        play(queue[queuePos]);
+        
+    updateQueue();
+    return false;
+}
+
 // skips to a video in the queue given queue index
 var skipTo = function(index) {
     if (index == queuePos)
@@ -89,7 +99,6 @@ var skipTo = function(index) {
     
     if (currentlyPlaying)
     	togglePlay();
-
 
     nowPlaying(unescape(queue[index].title));
     queuePos = index;
@@ -130,7 +139,7 @@ var updateQueue = function() {
     var counter = 0;
     var html = "<ul>";
     for (vid in queue) {
-        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
+        html += "<a href=\"#\" onClick=\"return delFrom(" + counter + ");\">";
         html += "<li class=\"span-8 last queuedVideo\" ";
         if (queuePos == vid) {
             html += " id=\"currentVideo\" ";
@@ -232,7 +241,7 @@ $(document).ready(function() {
             this.value = "Enter Youtube URL";
     });
     
-    
+    // Autocomplete initialization
     $("#searchTextBox").autocomplete(
     	{source:suggestTerm,
     	autoFill: true,
