@@ -139,7 +139,7 @@ var updateQueue = function() {
     var counter = 0;
     var html = "<ul>";
     for (vid in queue) {
-        html += "<a href=\"#\" onClick=\"return delFrom(" + counter + ");\">";
+        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
         html += "<li class=\"span-8 last queuedVideo\" ";
         if (queuePos == vid) {
             html += " id=\"currentVideo\" ";
