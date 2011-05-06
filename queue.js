@@ -249,4 +249,6 @@ $(document).ready(function() {
     );
     
     $("#searchTextBox").select();
+    
+    addToQueue("0GLoHifu6aM", "Placeholder Video");
 });
