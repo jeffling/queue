@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Queue</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+            
+        <!-- Framework CSS --> 
+        <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection"> 
+        <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]--> 
+		<!-- Adding "maximum-scale=1" fixes the Mobile Safar<a href="index.htm" id="" title="index">index</a>i auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+		<link rel="stylesheet" href="css/main.css" type="text/css">
+		<link rel="stylesheet" href="css/jquery-ui.css" type="text/css">	
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jQuery.jQTubeUtil.min.js"></script>
+		<script type="text/javascript" src="js/jQuery.tubeplayer.min.js"></script>
+        <script type="text/javascript" src="js/scrollTo.js"></script>
+		<script type="text/javascript">
+			jQTubeUtil.init({
+				key: "AI39si4de7RHRNjJdQ2Y1ZJHqVAM2J-hP8NavEShCr3BjYTDhBz3w4zvzjNfS03UslXtDyT6jaIUWpaWan3BbiRv_LLkofeUAA",
+				maxResults:10   // *optional -- defined as 10 results by default
+			});
+			
+			
+		</script>    	
+        <script type="text/javascript" src="js/callbacks.js"></script>
+		<script type="text/javascript" src="js/queue.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+
+	</head>
+	
+	<body lang="en">
+    <div class="container">
+		<div class="span-16" id="leftPanel">
+            <div class="span-16 last">
+                <div>
+                    <h1>Now Playing: </h1>
+                </div>
+                <h2 id="nowPlaying">PLACEHOLDER</h2>
+            </div>
+        	<div class="span-16 last" id="player">
+    		</div>
+			<div class="span-16 last">
+				<form id="searchForm">
+					<input value="Enter Search Term" class="title" type="text" id="searchTextBox"></input>
+					<input type="submit" id="searchFormSubmit"></input>
+				</form>
+			</div>
+			<div class="span-8">
+				<a class="selected" href="#" onClick="orderby='relevance';">Relevance</a> /
+				<a href="#" onClick="orderby='published';">Published</a> /
+				<a href="#" onClick="orderby='viewCount';">ViewCount</a> /
+				<a href="#" onClick="orderby='rating';">Rating</a> 
+			</div>
+			 
+			<div class="span-8 last">
+				<a href="#" onClick="time='today';">Today</a> /
+				<a href="#" onClick="time='this_week';">This week</a> /
+				<a href="#" onClick="time='this_month';">This month</a> /
+				<a class="selected" href="#" onClick="time='all_time';">All time</a>
+			</div>
+			<div class="span-16 last" id="searchResults">
+			</div>
+		</div>
+        <div class="span-8 last" id="rightPanel">
+            <div class="floatWithScroll">
+                <div class="span-8 last" id="playerControls">
+                    <a class="controls" href="#" onClick='playPrev()'><<</a>
+                    <a class="controls" href="#" onClick='togglePlay()'>></a>
+                    <a class="controls" href="#" onClick='playNext()'>>></a>
+                </div>
+                <div class="span-8 last" id="queue-display"></div>
+                <div class="span-8 last" id="videoEntry">
+                <form id="videoEntryForm">
+                    <input type="text" id="videoEntryBox" value="Enter Youtube URL"></input>
+        			<input type="submit" id="videoEntryFormSubmit"></input>
+    			</form></div>
+            </div>
+        </div>
+    </div>
+	</body>
+</html>
