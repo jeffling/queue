@@ -28,9 +28,7 @@ $(document).ready(function() {
     	onPlayerPlaying: function() {onPlayCB();}, // after the player starts playing
     	onPlayerEnded: function(){onStopCB();}
     });
-    
-    player.tubeplayer('destroy');
-    
+        
     // initialize rightPanel    
     $(window).resize(function(event) {    
         // makes sure the queue-display height is updated
@@ -64,7 +62,7 @@ $(document).ready(function() {
         
         if (results != null)   
             jQTubeUtil.video(results[1],function(response){
-	             addToQueue(results[1], response[0].title);
+	             addToQueue(results[1], response.videos[0].title);
             });
         
         $("#videoEntryBox").val("Enter Youtube URL");

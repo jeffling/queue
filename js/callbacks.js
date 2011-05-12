@@ -28,13 +28,14 @@ var onPlayCB = function(ytplayer) {
     currentlyPlaying = true;
     
     // in case they used the related video feature of the player
-    var url = ytplayer.getVideoUrl();
+    var url = player.tubeplayer('data').videoURL;
     var results = url.match("[\\?&]v=([^&#]*)");
     
     if (results != null) {
-        if (results[1] != queue[-1].videoId) {
+        if (results[1] != queue[queuePos].id) {
             jQTubeUtil.video(results[1],function(response){
-	             addToQueue(results[1], response[0].title);
+                 queuePos++;
+	             addToQueue(results[1], response.videos[0].title);	             
             });
         }
     }
@@ -48,7 +49,3 @@ var onStopCB = function() {
 	else
 		currentlyPlaying = false;
 };
-
-var stateChangeCB = function(state) {
-    alert(state);
-}
