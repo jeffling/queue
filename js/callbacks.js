@@ -23,36 +23,22 @@ var searchCB = function(response) {
     $(window).scrollTo("#searchTextBox", 800);
 };
 
-// Update Queue List
-var updateQueue = function() {
+// Video Play Handler
+var onPlayCB = function(ytplayer) {
+    currentlyPlaying = true;
     
-    // update queue list on UI
-    var counter = 0;
-    var html = "<ul>";
-    for (vid in queue) {
-        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
-        html += "<li class=\"span-8 last queuedVideo\" ";
-        if (queuePos == vid) {
-            html += " id=\"currentVideo\" ";
+    // in case they used the related video feature of the player
+    var url = ytplayer.getVideoUrl();
+    var results = url.match("[\\?&]v=([^&#]*)");
+    
+    if (results != null) {
+        if (results[1] != queue[-1].videoId) {
+            jQTubeUtil.video(results[1],function(response){
+	             addToQueue(results[1], response[0].title);
+            });
         }
-        html += ">";
-        html += "<div class=\"span-4 vidThumb\">";
-    	html += "<img ";
-        html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
-        html += "</div> <div class=\"span-4 last vidTitle\">"; 
-        html += "<h4>" + unescape(queue[vid].title) + "</h4>"; 
-        html += "</div></li>";
-        html += "</a>";
-        counter++;
     }
-    html += "</ul>";
-    $("#queue-display").html(html);
-    
-    // make list scroll with current video TODO: doesn't quite work loll
-    if (queue.length != 0)
-        $("#queue-display").scrollTo("#currentVideo", 100);
-        
-};
+}
 
 // Video Stop Handler
 var onStopCB = function() {
@@ -62,3 +48,7 @@ var onStopCB = function() {
 	else
 		currentlyPlaying = false;
 };
+
+var stateChangeCB = function(state) {
+    alert(state);
+}

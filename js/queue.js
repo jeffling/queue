@@ -1,12 +1,31 @@
-// Globals
-var queue = new Array();
-var queuePos = -1;
-var currentlyPlaying = false;
-var youtubeplayer;
-
-// Search options
-var orderby = "relevance";
-var time = "all_time";
+// Update Queue List
+var updateQueue = function() {
+    // update queue list on UI
+    var counter = 0;
+    var html = "<ul>";
+    for (vid in queue) {
+        html += "<a href=\"#\" onClick=\"return skipTo(" + counter + ");\">";
+        html += "<li class=\"span-8 last queuedVideo\" ";
+        if (queuePos == vid) {
+            html += " id=\"currentVideo\" ";
+        }
+        html += ">";
+        html += "<div class=\"span-4 vidThumb\">";
+    	html += "<img ";
+        html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
+        html += "</div> <div class=\"span-4 last vidTitle\">"; 
+        html += "<h4>" + unescape(queue[vid].title) + "</h4>"; 
+        html += "</div></li>";
+        html += "</a>";
+        counter++;
+    }
+    html += "</ul>";
+    $("#queue-display").html(html);
+    
+    // make list scroll with current video TODO: doesn't quite work loll
+    if (queue.length != 0)
+        $("#queue-display").scrollTo("#currentVideo", 100); 
+};
 
 // Change title and now playing header
 var nowPlaying = function(title)  {
@@ -52,7 +71,7 @@ var play = function(vid) {
 
     nowPlaying(unescape(vid.title));
     
-    jQuery("#player").tubeplayer("play", vid.id);
+    player.tubeplayer("play", vid.id);
     updateQueue();
     return false;
 }
@@ -60,9 +79,9 @@ var play = function(vid) {
 // Go between play/pause states
 var togglePlay = function() {
 	if (currentlyPlaying)
-		jQuery("#player").tubeplayer("pause");
+		player.tubeplayer("pause");
 	else
-	    jQuery("#player").tubeplayer("play");
+	    player.tubeplayer("play");
 };
 
 // Put to the back of the queue
@@ -102,8 +121,9 @@ var skipTo = function(index) {
 
     nowPlaying(unescape(queue[index].title));
     queuePos = index;
-    jQuery("#player").tubeplayer("play", queue[index].id);
+    player.tubeplayer("play", queue[index].id);
     updateQueue();
     return false;
 }
+
 

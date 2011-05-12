@@ -1,24 +1,35 @@
+// Globals
+var queue = new Array();
+var queuePos = -1;
+var currentlyPlaying = false;
+var player;
+
+// Search options
+var orderby = "relevance";
+var time = "all_time";
+
 $(document).ready(function() {
     var leftPanelWidth = $("#leftPanel").width();
     
 	// set up player
-    jQuery("#player").tubeplayer({
+    player = jQuery("#player").tubeplayer({
         width: leftPanelWidth,
         height: (leftPanelWidth/4)*3,
-    	playerID: "youtube-player", // the ID of the embedded youtube player
+    	playerID: "ytplayer", // the ID of the embedded youtube player
         initialVideo: "0GLoHifu6aM",
+        iframed: true,
     	preferredQuality: "default",// preferred quality: default, small, medium, large, hd720
-    	onPlay: function(id){currentlyPlaying = true;}, // after the play method is called
+    	onPlay: function(id){}, // after the play method is called
     	onPause: function(){}, // after the pause method is called
     	onStop: function(){currentlyPlaying = false;}, // after the player is stopped
     	onSeek: function(time){}, // after the video has been seeked to a defined point
     	onMute: function(){}, // after the player is muted
     	onUnMute: function(){}, // after the player is unmuted
+    	onPlayerPlaying: function() {onPlayCB();}, // after the player starts playing
     	onPlayerEnded: function(){onStopCB();}
     });
-
-    // get the player reference just in case
-    youtubeplayer = jQuery("#player").tubeplayer("player");
+    
+    player.tubeplayer('destroy');
     
     // initialize rightPanel    
     $(window).resize(function(event) {    
