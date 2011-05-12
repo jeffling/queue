@@ -1,7 +1,6 @@
 // Callback for the search form. 
 // Search Result Display
 var searchCB = function(response) {
-    
     // Update UI
     var html = ""; 
     	for(vid in response.videos){

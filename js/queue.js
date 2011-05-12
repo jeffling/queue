@@ -10,13 +10,14 @@ var updateQueue = function() {
             html += " id=\"currentVideo\" ";
         }
         html += ">";
-        html += "<div class=\"span-4 vidThumb\">";
+        html += "<div class=\"span-3 vidThumb\">";
     	html += "<img ";
         html += "src=\"http://img.youtube.com/vi/" + queue[vid].id + "/3.jpg\">";
-        html += "</div> <div class=\"span-4 last vidTitle\">"; 
+        html += "</div> <div class=\"span-4 vidTitle\">"; 
         html += "<h4>" + unescape(queue[vid].title) + "</h4>"; 
-        html += "</div></li>";
-        html += "</a>";
+        html += "</div>";
+        html += "<a href=\"#\" class=\"delButton\" onClick=\"return delFrom(" + counter + ");\">X</a>";
+        html += "</li></a>";
         counter++;
     }
     html += "</ul>";

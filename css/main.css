@@ -75,3 +75,8 @@ a {
 .queuedVideo:hover {
     background:lightgrey;
 }
+
+.delButton {
+    float:right;
+    padding:5px;
+}
